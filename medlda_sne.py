@@ -12,27 +12,25 @@ X=[]
 y=[]
 
 for i in range(3):
-	with open('interest/dump_test_doc.'+str(i), 'r') as XFile:
+	with open('political/dump_test_doc.'+str(i), 'r') as XFile:
 		for line in XFile:
 			X.append([float(x) for x in line.split()])
-	with open('interest/dump_test_pred.'+str(i), 'r') as yFile:
+	with open('political/dump_test_pred.'+str(i), 'r') as yFile:
 		#num_lines = sum(1 for line in yFile)
 		for line in yFile:
 			y.append(int(line.split()[0]))
 
-political = ['libertarian', 'liberal', 'conservative', 'revolutionary','anarchist' ,  'moderate','tea party', 'progressive']
+newsgroup = ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware', 'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball', 'rec.sport.hockey', 'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian', 'talk.politics.guns', 'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
+political = ['libertarian', 'liberal', 'progressive', 'moderate', 'tea party', 'conservative', 'anarchist', 'revolutionary']
 interest=['technology', 'music','sports',  'gaming']
-class_num = len(interest) #20 for news group
+class_num = len(political) #20 for news group
 print(str(len(X))+'*'+str(len(X[0]))) # X: array of arrays: dump_test_doc
 print(len(y)) # y: array of labels: dump_test_pred
-
 #----------------------------------------------------------------------
 # Scale and visualize the embedding vectors
 def plot_embedding(X, title=None):
     x_min, x_max = np.min(X, 0), np.max(X, 0)
-    X = (X - x_min) / (x_max+5 - x_min)
-    x_mid = (np.max(X, 0) + np.min(X, 0))/2
-    print x_mid
+    X = (X - x_min) / (x_max - x_min)
     plt.figure()
     ax = plt.subplot(111)
     for i in range(X.shape[0]):
@@ -44,11 +42,11 @@ def plot_embedding(X, title=None):
 tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
 X_tsne = tsne.fit_transform(X)
 
-plot_embedding(X_tsne, "t-SNE embedding of Interest Focused User Classification by MedLDA")
+plot_embedding(X_tsne, "t-SNE embedding of Political Orientation Prediction by MedLDA")
 
 legend_patches=[]
 for i in range(class_num):
-	legend_patches.append(mpatches.Patch(color=plt.cm.Set1(i / float(class_num)), label=str(i)+':'+interest[i]))
+	legend_patches.append(mpatches.Patch(color=plt.cm.Set1(i / float(class_num)), label=str(i)+':'+political[i]))
 plt.legend(handles=legend_patches, bbox_to_anchor=(0.,-0.09 , 1., .102), loc=3,ncol=4, mode="expand", borderaxespad=0., fontsize = 9)
 plt.show()
 

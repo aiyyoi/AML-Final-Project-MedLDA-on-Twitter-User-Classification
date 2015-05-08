@@ -8,7 +8,7 @@ auth.set_access_token('391259637-lUfQ9joo8tG3LGwfQqdJuCO4M6YwZ6RxhllAnrKZ', 'wr0
 api = tweepy.API(auth)
 
 # 3, ignore word list
-ignore_list = ['','uh','oh','and','or', 'for', 'a', 'I', 'u','you','them','we','they','their', 'is', 'lt','go', 'are', 'of', 'at', 'with', 'in', 'out', 'to', 'RT', 'this', 'that', 'there', 'the', 'it', 'into', 'these','those','then', 'than', 'am','pm','et', 'ct','pt','as', 'hey','w/','w/o']
+ignore_list = open('ignore.list', 'r')
 # 4, also check and ignore string.startswith('http://')
 # 1, check and remove @ or # before or after string
 punc=['@', '"', "'",'#', '.', ',', ':', '!','?',';','=','+','<','>','&', ' ', '(',')', '/', '~', '|']
@@ -18,29 +18,27 @@ split=['&','-','_']
 
 # For political orientation
 # 30 Libertarian Users
-libertarian=['stephengordon', 'TopLibertarian', 'LPNational', 'libertyideals', 'SlavLibertarian', 'RobertDButler2', 'robertmeyer9', 'LibertyIsNow', 'freedompolitics', 'LibertarianView', 'A_Liberty_Rebel', 'libstandard', 'jfktruther', 'LibertariansFor', 'libertarianJ', 'TheLibRepublic', 'NM_libertarian', 'LPIN', 'Libertarian_New', 'LPTexas', 'JulieBorowski', 'thornecassidy', 'RobMcNealy', 'HellFogg', 'LibertarianCiti', 'solmc', 'RonPaul_2012', 'normanhorn', 'karldickey', 'dmataconis']
+libertarian= open('libertarian','r')
 # Liberal Users
-liberal=['LiberalsAreCool', 'LiberalAus', 'LibDems', 'liberal_party', 'BeingLiberal','LiberalPhenom','LiberalCap', 'LiberalTucker','michlib','tomwatson', 'thinkprogress','theprospect', 'SuzyKhimm','JeffreyFeldman', 'Wolfrum','benjaminspector','proudlib', 'mercerstine','LibManifest','realLibs','marpiwill','Politics_PR','XtinaDavidson','GodlessLiberals','MuggleBornNY','SoapboxLiberal','WiseLiberal','mattdawidowicz','keystonepol','politicususa']
+liberal= open('liberal','r')
 # Conservative
-conservative=['paulbenedict7', 'gopleader','rightwingnews','anna12061', 'Conservatives', 'YoungCons', 'CPC_HQ', 'GOHConservative', 'TeaPartyCat', 'CR', 'ConNewsNow', 'NYConsMom', 'SCF', 'GOPLADYAMY', 'jdigg78', 'ConservativeQuo', 'MrConservative_','CICMedia', 'teaparty321', 'PatriotTweetz', 'rightcuban', 'ConservativeMag', 'ConservLatina', 'BlacksFund', 'conserv_tribune', 'liberaltreason', 'Steelpolynbrass', 'Eggoverlight', 'MadCityCon', 'conking', 'cnsnews']
+conservative=open('conservative','r')
 # Revolutionary
-revolutionary=['therrevolution','BootsRiley', 'MarxProject', 'soulrebelJ', 'tweetmarx', 'QuoteRevolution','chiume', 'USRevolutionWar', 'RYA_Punjab', 'aroydee', 'RevolutnryMedia', 'SpringfieldFree', 'radicaldaily', 'Rosa__Luxemburg', 'RevolutionChan', 'NjabuloCB', 'Richard_P_Smith', 'RadicalProverbs', 'ykhong', 'HoCHlminh', 'RevolutionaryPo', 'EricSaenz4', 'RevolutionsLaws','RadicalBooks', 'blankstudent', 'MrLewis915']
+revolutionary=open('revolutionary', 'r')
 # Progressive, 
-progressive=['thinkprogress', 'thenation', 'chrislhayes', 'dailykos', 'alternet', 'AFLCIO', 'BoldProgressive', 'DrDigiPol', 'GottaLaff', 'TPElections', 'theprogressive', 'keithellison', 'allisonkilkenny', 'BobFertik', 'ProgressivePam', 'maddow', 'ProgressMich', 'ProgressOnline', 'NYWFP', 'WhiteHouse', 'ProgressNowCO', 'greenparty_ie', 'jricole', 'gaycivilrights', 'kwcollins','NewRoosevelt', 'JoeWalshDC', 'carlsciortino', 'rosswallen', 'ManhattanGreens']
+progressive=open('progressive', 'r')
 #Tea party, 
-tea_party = ['TPPatriots','michaeljohns', 'TeaPartyExpress', 'TeaPartyOrg', 'TheTeaParty_net', 'TeaPartyNevada', 'teapartynation', 'TeaParty365', 'teapartynews', 'jennybethm', 'TeaPartyPatriot', 'RenoTeaParty', 'TeaParty_Leader', 'nogirlemen', 'teapartytown', 'TeaPartyReport', 'HoustonTeaParty', 'TeaPartyDeanie', 'TeaPartyArmy', 'EValleyTeaParty', 'TeaPartyRepubs', 'TeaPartyPolice', 'Tea_Party_Now', 'TeaPartyAllies1', 'tylerteaparty', 'BCSTeaParty', 'TeaPartyJane', 'dsmteaparty', 'TeaPartyUSA41', 'TeaParty4Perry']
+tea_party = open('teaparty', 'r')
 #Independent&moderate, 
-moderate=['CortneyTippery', 'BruceThompson51', 'Emperor_Bob', 'CassoforCO', 'DavisPaine', 'JerryLeeGP', '_politics_', 'reasonablymod', 'mjwstickings', 'bspence5', 'CLTmathMOM', 'iamrc10', 'Salon_Politics', 'Newsmax_Media', 'ShiftingGrounds', 'thenewpolitical','14democracy', 'bamagirl0117', 'Politicolnews', 'TheIndyExpress', 'GIS_Info', 'NoLabelCentrist', 'FedUpPolitics', 'FactChek', 'Indie_Voters', 'MStrawPSU']
+moderate=open('moderate', 'r')
 #anarchist
-anarchist=['anarchists', 'anarchistwriter', 'OccupyWallSt', 'AfedEdinburgh', 'SwindonAnarchos', 'ODANARCHISTS', 'AnarchistLens', 'AnarchistBH', 'Anarchists4Life', 'OpWallStreet', 'AnarchistFed', 'AnarchistNews', 'PriyaWarcry', 'OccupyWallStNYC']
-
-political = [libertarian, liberal, conservative, revolutionary, progressive, tea_party, moderate, anarchist]
+anarchist= open('anarchist','r')
+political = [libertarian, liberal, progressive, moderate, tea party, conservative, anarchist, revolutionary]
 # Personal Interest
-tech=['techcrunch', 'google', 'timoreilly', 'leolaporte', 'Scobleizer', 'jeffpulver', 'PCMag', 'digiphile', 'mikebutcher', 'technology', 'nytimestech', 'CAinc', 'fttechnews', 'TEDchris', 'BBCTech', 'TelegraphTech', 'GlobeTechnology', 'AccentureTech', 'MedNetTech', 'SteveLohr', 'TechnologyGeek', 'AFRtechnology', 'PostTechNews', 'griffintech', 'ZebraTechnology', 'technologybuzz', 'SalonTechnology', 'WSJdigits', 'WIRED', 'us_technology', 'physorg_tech']
-sport=['espn', 'NYTSports', 'SHAQ', 'AdamSchefter', 'darrenrovell', 'SportsCenter', 'SInow', 'CBSSportsGang', 'nfl', 'BuzzFeedSports', 'WSJSports', 'CNBCSportsBiz', 'MSGSportsNYC', 'NBCSports', 'SkySportsNewsHQ', 'FOXSports', 'guardian_sport', '5liveSport', 'YahooSports', 'EliasSports', 'BBCSport', 'ChrisWragge', 'IndoSport', 'FirstpostSports', 'TelegraphSport', 'CBSSportsNet', 'SkySportsNFL', 'SkySportsFL', 'FSSouthwest', 'NFLonFOX', 'NewsdaySports']
-music=['musicindustry54', 'musicindustrypr', 'SimplySFans', 'ReverbNation', 'hypebot', 'ArtistReach', 'MusicDreamer', 'womeninmusicorg', 'metalinsider', 'EINMusicNews', 'MusicWeek', 'MusicInd_News', 'LA_Music_Pros', 'agentofchangeNY', 'MusicInd2day', 'THR_EarShot', 'MusicIndConnect', 'music_industry2', 'MusicLinkUp', 'MusicForRelief', 'UK_Music', 'themusicnetwork', 'billboard', 'CLGMusicMedia', 'SPINmagazine', 'BleepBot']
-gamer=['PlayStation', 'IGN', 'AskPlayStation', 'OPM_UK', 'VideoGamerCom', 'VideoGameWeekly', 'gamespot', 'VideoGamerRob', 'Kotaku', 'RockstarGames', 'L337Lauren', 'GP_Video_Games', 'Xbox', 'MVGworld', 'joystiq', 'gamespot', 'TheAvgGamer', 'VidGame_Blog', 'gamesandtrailer', 'VideoGaming_Hub', 'GamingDecoded', 'GamingRats', 'jwhdavison', 'justvideogames', 'GamerSpy1', 'gameinformer']
-
+tech=open('tech','r')
+sport=open('sport','r')
+music=open('music','r')
+gamer=open('gamer','r')
 interest=[tech, sport, music, gamer]
 
 def preProcessWords(description):
@@ -120,7 +118,7 @@ interest_list=[]
 
 f_train = open('interest.train','a')
 f_test = open('interest.test', 'a')
-#4/6 test/train
+#4/6 train/test
 for label_id in range(len(interest)):
 	overall_dict={}
 	for user_id in range(len(interest[label_id])):
